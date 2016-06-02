@@ -1,0 +1,186 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+
+<dom-module id="things-card-image">
+	<template>
+		<style>
+			:host{
+				display: block;
+				background-color:var(--things-whitegrey-background-color);
+			}
+      paper-fab{
+        @apply(--things-search-fab);
+      }
+			paper-card{
+        @apply(--things-label-card-container)
+      }
+      paper-card:last-child{margin-right:0;}
+      paper-card::shadow iron-image img{height:105px !important;}
+      paper-card .card-info{
+        padding:0 7px 7px 7px;
+        font-size:11px;
+        color:green;
+      }
+      paper-card::shadow .title-text{
+        position:relative !important;
+        border-top:1px dotted rgba(0,0,0,.09);
+        padding:5px 7px 0 7px !important;
+        font-size:14px !important
+      }
+			@media only all and (min-width: 400px)  {paper-card{width:  98% !important;}}
+      @media only all and (min-width: 500px)  {paper-card{width:  47% !important;}}
+      @media only all and (min-width: 800px)  {paper-card{width:  30% !important;}}
+      @media only all and (min-width: 900px)  {paper-card{width:30.5% !important;}}
+      @media only all and (min-width:1250px)  {paper-card{width:22.6% !important;}}
+      @media only all and (min-width:1800px)  {paper-card{width:17.5% !important;}}
+      @media only all and (min-width:2150px)  {paper-card{width:14.4% !important;}}
+		</style>
+
+		<paper-card id="card"
+		  heading="[[heading]]"
+	    image="[[image]]"
+	    animated="[[animated]]"
+	    animated-shadow="[[animatedShadow]]"
+	    preload-image="[[preloadImage]]"
+	    fade-image="[[fadeImage]]"
+	    elevation="[[elevation]]">
+	    <div class="card-info">
+      	[[description]]
+      </div>
+
+    	<paper-icon-button id="toggle-btn" icon="arrow-drop-down" on-tap="_toggle"></paper-icon-button>
+    	<iron-collapse id="card-detail">
+					<template is="dom-repeat" items="[[detailForm]]">
+						<span>[[item.name]] : [[item.value]]</span>
+					</template>
+      </iron-collapse>
+		</paper-card>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'things-card-image',
+
+			properties: {
+				
+				/**
+				 * Ajax 호출 URL
+				 */
+				searchUrl: {
+					type: String,
+					value: '/labels'
+				},
+
+				/**
+				 * card image의 title text
+				 */
+				heading: {
+					type: String
+				},
+
+				/**
+				 * card image description
+				 */
+				description: {
+					type: String
+				},
+
+				/**
+				 * image source (image src url, base64, path 모두 가능)
+				 */
+				image: {
+					type: String
+				},
+
+
+				/**
+				 * Read-only property used to pass down the animatedShadow value to the underlying paper-material style (since they have different names).
+				 */
+				animated: {
+					type: Boolean,
+					value: false
+				},
+
+				/**
+				 * Set this to true to animate the card shadow when setting a new z value.
+				 */
+				animatedShadow: {
+					type: Boolean,
+					value: false
+				},
+
+				/**
+				 * When preloadImage is true, setting fadeImage to true will cause the image to fade into place.
+				 */
+				fadeImage: {
+					type: Boolean,
+					value: false
+				},
+
+				/**
+				 * When true, any change to the image url property will cause the placeholder image to be shown until the image is fully rendered.
+				 */
+				preloadImage: {
+					type: Boolean,
+					value: false
+				},
+
+				/**
+				 * The z-depth of the card, from 0-5.
+				 */
+				elevation: {
+					type: Number
+				},
+
+				/**
+				 * things-card-image를 통해 전달받는 property로 detail 정보에 출력할 필드 목록을 array 형태로 받습니다.
+				 */
+				fieldArray: {
+					type: Array,
+					observer: 'fieldArrayChanged'
+				},
+
+				/**
+				 * things-card-image를 통해 전달받는 property로 카드의 메타 정보를 포함한 object 입니다.
+				 */
+				detailObj: {
+					type: Object
+				},
+
+				/**
+				 * fieldArrayChanged 함수를 통해 추출한 detail 정보의 최종 object 입니다..
+				 */
+				detailForm: {
+					type: Object
+				}
+			},
+
+			/**
+			 * card image의 detail view를 토글
+			 */
+			_toggle: function(e) {
+				console.log(this.fieldArray);
+				console.log(this.detailObj);
+				this.$['card-detail'].toggle();
+			},
+
+			/**
+			 * fieldArray, detailObj를 바탕으로 화면에 출력할 detailForm을 추출합니다.
+			 */
+			fieldArrayChanged: function(fieldArray) {
+				var tempObj = this.detailObj;
+				var newObjArr = [];
+
+				for(var i = 0 ; i < fieldArray.length ; i++) {
+					var prop = fieldArray[i];
+					var value = this.detailObj[prop];
+					newObjArr.push({ name : prop, value : value});
+				}
+
+				this.detailForm = newObjArr;
+			}
+		});
+	</script>
+</dom-module>

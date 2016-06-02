@@ -1,0 +1,90 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="things-card-image.html">
+
+<dom-module id="things-card-image-list">
+	<template>
+		<things-ajax
+			auto="[[isAjax]]"
+      id="label-search"
+      method="GET"
+      resource-url="[[searchUrl]]"
+      last-response="{{items}}">
+		</things-ajax>
+		
+		<template id="card-list" is="dom-repeat" items="[[items]]">
+			<things-card-image
+				heading="[[item.name]]"
+				image="[[item.thumbnail]]"
+				description="[[item.description]]"
+				field-array="[[fieldArray]]"
+				detail-obj="[[item]]">
+			</things-card-image>
+		</template>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'things-card-image-list',
+
+			properties: {
+
+				/**
+				 * isAjax가 true라면 ajax call을 통해 받은 response를 카드 데이터로 받습니다.
+				 * isAjax가 false라면 attribute를 통해 전달 받은 값을 카드 데이터로 받습니다.
+				 */
+				items: {
+					type: Object,
+				},
+
+				/**
+				 * attribute로 전달받은 detail list String 명세
+				 */
+				detailFields: {
+					type: String,
+					observer: 'detailFieldChanged'
+				},
+
+				/**
+				 * detailFieldChanged 함수를 통해 변환한 detail list Array 명세
+				 */
+				fieldArray: {
+					type: Array
+				},
+
+				/**
+				 * ajax 호출용 url
+				 */
+				searchUrl: {
+					type: String,
+					observer: 'searchUrlChanged'
+				},
+
+				/**
+				 * ajax 호출을 사용할지 여부 searchUrl이 있을 경우 true로 전환된다.
+				 */
+				isAjax: {
+					type: Boolean,
+					value: false
+				},
+				
+			},
+
+			/**
+			 * attribute로 전달받은 string 형태의 detailFileds를 array형태로 변환하고
+			 * fieldArray에 초기화
+			 */
+			detailFieldChanged: function(fields) {
+				this.fieldArray = fields.split(",");
+			},
+
+			/**
+			 * searchUrl이 있다면 ajax호출을 실행한다.
+			 */
+			searchUrlChanged: function(searchUrl) {
+				if(searchUrl && searchUrl.length > 0) {
+					this.isAjax = true;
+				}
+			}
+		});
+	</script>
+</dom-module>
