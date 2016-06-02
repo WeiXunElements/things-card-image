@@ -50,10 +50,10 @@
       	[[description]]
       </div>
 
-    	<paper-icon-button id="toggle-btn" icon="arrow-drop-down" on-tap="_toggle"></paper-icon-button>
+    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-up" on-tap="_toggle"></paper-icon-button>
     	<iron-collapse id="card-detail">
 					<template is="dom-repeat" items="[[detailForm]]">
-						<span>[[item.name]] : [[item.value]]</span>
+						<span>[[item.name]] : [[item.value]]</span><br>
 					</template>
       </iron-collapse>
 		</paper-card>
@@ -93,7 +93,6 @@
 				image: {
 					type: String
 				},
-
 
 				/**
 				 * Read-only property used to pass down the animatedShadow value to the underlying paper-material style (since they have different names).
@@ -154,16 +153,17 @@
 				 */
 				detailForm: {
 					type: Object
-				}
+				},
 			},
 
 			/**
 			 * card image의 detail view를 토글
 			 */
-			_toggle: function(e) {
-				console.log(this.fieldArray);
-				console.log(this.detailObj);
-				this.$['card-detail'].toggle();
+			_toggle: function() {
+        var moreInfo = this.$['card-detail'];
+        var iconButton = Polymer.dom(event).localTarget;
+        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
+        moreInfo.toggle();
 			},
 
 			/**
