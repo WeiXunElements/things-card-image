@@ -50,10 +50,12 @@
       </div>
 
     	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-up" on-tap="_toggle"></paper-icon-button>
-    	<iron-collapse id="card-detail">
-					<template is="dom-repeat" items="[[detailForm]]">
-						<span>[[item.name]] : [[item.value]]</span><br>
-					</template>
+    	<iron-collapse 
+    		id="card-detail"
+    		opened="[[opened]]">
+				<template is="dom-repeat" items="[[detailForm]]">
+					<span>[[item.name]] : [[item.value]]</span><br>
+				</template>
       </iron-collapse>
 		</paper-card>
 	</template>
@@ -164,6 +166,14 @@
 				 */
 				detailForm: {
 					type: Object
+				},
+
+				/**
+				 * detail view를 펼쳐 놓을지 여부.
+				 */
+				opened: {
+					type: Boolean,
+					value: true
 				}
 			},
 
