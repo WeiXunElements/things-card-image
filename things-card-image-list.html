@@ -7,7 +7,7 @@
 			<things-card-image
 				heading="[[item.name]]"
 				description="[[item.description]]"
-				field-array="[[fieldArray]]"
+				detailFields="[[detailFields]]"
 				detail-obj="[[item]]"
 				attachment-id="[[item.attachment_id]]"
 				image-field="[[imageField]]"
@@ -33,15 +33,7 @@
 				 * detail view에 출력하고자 하는 field을 string 으로 받는다.
 				 */
 				detailFields: {
-					type: String,
-					observer: 'detailFieldChanged'
-				},
-
-				/**
-				 * detailFieldChanged를 통해 array로 변환한 detailFields
-				 */
-				fieldArray: {
-					type: Array
+					type: String
 				},
 
 				/**
@@ -58,14 +50,6 @@
 					type: Boolean,
 					value: false
 				}
-			},
-
-			/**
-			 * attribute로 전달받은 string 형태의 detailFileds를 array형태로 변환하고
-			 * fieldArray에 초기화
-			 */
-			detailFieldChanged: function(fields) {
-				this.fieldArray = fields.split(",");
 			}
 		});
 	</script>
