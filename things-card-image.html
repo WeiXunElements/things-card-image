@@ -44,12 +44,13 @@
 	    animated-shadow="[[animatedShadow]]"
 	    preload-image="[[preloadImage]]"
 	    fade-image="[[fadeImage]]"
-	    elevation="[[elevation]]">
+	    elevation="[[elevation]]"
+	    on-tap="getMetaInfo">
 	    <div class="card-info">
       	[[description]]
       </div>
 
-    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-up" on-tap="_toggle"></paper-icon-button>
+    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-up" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
     	<iron-collapse 
     		id="card-detail"
     		opened="[[opened]]">
@@ -174,6 +175,14 @@
 				opened: {
 					type: Boolean,
 					value: true
+				},
+
+				/**
+				 * 현재 화면이 셀렉터인지 확인하여 토글 버튼 비활성화
+				 */
+				isSelector: {
+					type: Boolean,
+					value: false
 				}
 			},
 
@@ -215,6 +224,13 @@
 					newObjArr.push({ name : prop, value : value});
 				}
 				this.detailForm = newObjArr;
+			},
+
+			/**
+			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen합니다.
+			 */
+			getMetaInfo: function(e) {
+				this.fire('things-card-image-selected', this.detailObj);
 			}
 		});
 	</script>

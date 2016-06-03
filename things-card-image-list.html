@@ -10,7 +10,8 @@
 				field-array="[[fieldArray]]"
 				detail-obj="[[item]]"
 				attachment-id="[[item.attachment_id]]"
-				image-field="[[imageField]]">
+				image-field="[[imageField]]"
+				is-selector="[[isSelector]]">
 			</things-card-image>
 		</template>
 	</template>
@@ -48,6 +49,14 @@
 				 */
 				imageField: {
 					type: String
+				},
+
+				/**
+				 * 현재 화면이 셀렉터인지 확인하여 토글 버튼 비활성화
+				 */				
+				isSelector: {
+					type: Boolean,
+					value: false
 				}
 			},
 
