@@ -50,7 +50,7 @@
       	[[description]]
       </div>
 
-    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-up" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
+    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
     	<iron-collapse 
     		id="card-detail"
     		opened="[[opened]]">
@@ -188,6 +188,11 @@
 				isSelector: {
 					type: Boolean,
 					value: false
+				},
+
+				detailToggle: {
+					type: Boolean,
+					value: false
 				}
 			},
 
@@ -213,6 +218,7 @@
         var moreInfo = this.$['card-detail'];
         var iconButton = Polymer.dom(event).localTarget;
         iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
+        this.detailToggle = true;
         moreInfo.toggle();
 			},
 
@@ -243,7 +249,11 @@
 			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen합니다.
 			 */
 			getMetaInfo: function(e) {
-				this.fire('things-card-image-selected', this.detailObj);
+				if(this.detailToggle) {
+					this.detailToggle = false;
+				} else {
+					this.fire('things-card-image-selected', this.detailObj);
+				}
 			}
 		});
 	</script>
