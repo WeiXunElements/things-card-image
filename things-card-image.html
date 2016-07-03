@@ -148,7 +148,8 @@
 				 * things-card-image를 통해 전달받는 property로 카드의 메타 정보를 포함한 object 입니다.
 				 */
 				detailObj: {
-					type: Object
+					type: Object,
+					observer: '_imageFieldChanged'
 				},
 
 				/**
@@ -200,7 +201,10 @@
 			 * detailObj에서 key가 imageField의 값과 같은 것을 추출해 imageSrc에 맵핑
 			 */
 			_imageFieldChanged: function(imageField) {
-				this.imageSrc = this.detailObj[imageField];
+				this.imageSrc = this.detailObj[this.imageField];
+				if (this.detailFields) {
+					this.detailFieldChanged(this.detailFields);
+				}
 			},
 
 			/**
