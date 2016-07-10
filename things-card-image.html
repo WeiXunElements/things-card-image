@@ -53,6 +53,7 @@
     	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
     	<iron-collapse 
     		id="card-detail"
+    		hidden="[[hideDetail]]"
     		opened="[[opened]]">
 				<template is="dom-repeat" items="[[detailForm]]">
 					<span class$="[[item.name]]">[[item.value]]</span>
