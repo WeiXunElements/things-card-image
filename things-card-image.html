@@ -1,64 +1,73 @@
 <link rel="import" href="../polymer/polymer.html">
+
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-collapse/iron-collapse.html">
 
+<link rel="import" href="../things-global-behavior/things-global-behavior.html">
+
+<!--
+	Image Card
+-->
+
 <dom-module id="things-card-image">
 	<template>
 		<style>
-			:host{
+			:host {
 				display: compact;
 			}
-      paper-fab{
-        @apply(--things-search-fab);
-      }
-			paper-card{
-        @apply(--things-label-card-container)
-      }
-      paper-card:last-child{margin-right:0;}
-      paper-card::shadow iron-image img{height:105px !important;}
-      paper-card .card-info{
-        padding:0 7px 7px 7px;
-        font-size:11px;
-        color:green;
-      }
-      paper-card::shadow .title-text{
-        position:relative !important;
-        border-top:1px dotted rgba(0,0,0,.09);
-        padding:5px 7px 0 7px !important;
-        font-size:14px !important
-      }
+			paper-fab {
+				@apply(--things-search-fab);
+			}
+			paper-card {
+				@apply(--things-label-card-container)
+			}
+			paper-card:last-child {
+				margin-right:0;
+			}
+			paper-card::shadow iron-image img {
+				height:105px !important;
+			}
+			paper-card .card-info {
+				padding:0 7px 7px 7px;
+				font-size:11px;
+				color:green;
+			}
+			paper-card::shadow .title-text {
+				position:relative !important;
+				border-top:1px dotted rgba(0,0,0,.09);
+				padding:5px 7px 0 7px !important;
+				font-size:14px !important
+			}
+
 			@media only all and (min-width: 400px)  {paper-card{width:  98% !important;}}
-      @media only all and (min-width: 500px)  {paper-card{width:  47% !important;}}
-      @media only all and (min-width: 800px)  {paper-card{width:  30% !important;}}
-      @media only all and (min-width: 900px)  {paper-card{width:30.5% !important;}}
-      @media only all and (min-width:1250px)  {paper-card{width:22.6% !important;}}
-      @media only all and (min-width:1800px)  {paper-card{width:17.5% !important;}}
-      @media only all and (min-width:2150px)  {paper-card{width:14.4% !important;}}
+			@media only all and (min-width: 500px)  {paper-card{width:  47% !important;}}
+			@media only all and (min-width: 800px)  {paper-card{width:  30% !important;}}
+			@media only all and (min-width: 900px)  {paper-card{width:30.5% !important;}}
+			@media only all and (min-width:1250px)  {paper-card{width:22.6% !important;}}
+			@media only all and (min-width:1800px)  {paper-card{width:17.5% !important;}}
+			@media only all and (min-width:2150px)  {paper-card{width:14.4% !important;}}
 		</style>
 
-		<paper-card id="card"
-		  heading="[[heading]]"
-	    image="[[computeImgSrc(imageSrc)]]"
-	    animated="[[animated]]"
-	    animated-shadow="[[animatedShadow]]"
-	    preload-image="[[preloadImage]]"
-	    fade-image="[[fadeImage]]"
-	    elevation="[[elevation]]"
-	    on-tap="getMetaInfo">
-	    <div class="card-info">
-      	[[description]]
-      </div>
-
-    	<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
-    	<iron-collapse 
-    		id="card-detail"
-    		hidden="[[hideDetail]]"
-    		opened="[[opened]]">
+		<paper-card 
+			id="card"
+			heading="[[heading]]"
+			image="[[imageSrc]]"
+			animated="[[animated]]"
+			animated-shadow="[[animatedShadow]]"
+			preload-image="[[preloadImage]]"
+			fade-image="[[fadeImage]]"
+			elevation="[[elevation]]"
+			on-tap="getMetaInfo">
+			<div class="card-info">[[description]]</div>
+			<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
+			<iron-collapse 
+				id="card-detail"
+				opened="[[opened]]">
 				<template is="dom-repeat" items="[[detailForm]]">
 					<span class$="[[item.name]]">[[item.value]]</span>
 				</template>
-      </iron-collapse>
+			</iron-collapse>
 		</paper-card>
 	</template>
 
@@ -71,7 +80,6 @@
 			],
 
 			properties: {
-				
 				/**
 				 * card image의 title text
 				 */
@@ -132,6 +140,9 @@
 					type: Number
 				},
 
+				/**
+				 * 화면에 표시될 Detail Fields
+				 */
 				detailFields: {
 					type: String,
 					observer: 'detailFieldChanged'
@@ -149,8 +160,7 @@
 				 * things-card-image를 통해 전달받는 property로 카드의 메타 정보를 포함한 object 입니다.
 				 */
 				detailObj: {
-					type: Object,
-					observer: '_imageFieldChanged'
+					type: Object
 				},
 
 				/**
@@ -192,6 +202,9 @@
 					value: false
 				},
 
+				/**
+				 * 상세 정보를 트글하기 위함
+				 */
 				detailToggle: {
 					type: Boolean,
 					value: false
@@ -208,11 +221,6 @@
 				}
 			},
 
-			computeImgSrc: function(src) {
-				var src = `${this.globals.baseUrl}/download/${src}`;
-				return src
-			},
-
 			/**
 			 * attachmentId를 통해 image를 추출 합니다.
 			 */
@@ -225,11 +233,11 @@
 			 * card image의 detail view를 토글
 			 */
 			_toggle: function() {
-        var moreInfo = this.$['card-detail'];
-        var iconButton = Polymer.dom(event).localTarget;
-        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
-        this.detailToggle = true;
-        moreInfo.toggle();
+				var moreInfo = this.$['card-detail'];
+				var iconButton = Polymer.dom(event).localTarget;
+				iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
+				this.detailToggle = true;
+				moreInfo.toggle();
 			},
 
 			/**
@@ -252,6 +260,7 @@
 					var value = this.detailObj[prop];
 					newObjArr.push({ name : prop, value : value});
 				}
+				
 				this.detailForm = newObjArr;
 			},
 

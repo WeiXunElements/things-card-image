@@ -1,6 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
+
 <link rel="import" href="../iron-scroll-target-behavior/iron-scroll-target-behavior.html">
 <link rel="import" href="things-card-image.html">
+
+<!--
+	Image Card List
+-->
 
 <dom-module id="things-card-image-list">
 	<template>
@@ -23,7 +28,6 @@
 			is: 'things-card-image-list',
 
 			properties: {
-				
 				/**
 				 * ajax 호출을 통해 받는 items object
 				 */
@@ -47,7 +51,7 @@
 
 				/**
 				 * 현재 화면이 셀렉터인지 확인하여 토글 버튼 비활성화
-				 */				
+				 */
 				isSelector: {
 					type: Boolean,
 					value: false
