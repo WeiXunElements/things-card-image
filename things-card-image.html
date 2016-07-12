@@ -225,8 +225,10 @@
 			 * attachmentId를 통해 image를 추출 합니다.
 			 */
 			_attachmentIdChanged: function(id) {
-				var baseUrl = this.get('globals.baseUrl');
-				this.imageSrc = baseUrl + '/download/' + id;
+				if(id) {
+					var baseUrl = this.get('globals.baseUrl');
+					this.imageSrc = baseUrl + '/download/' + id;
+				}
 			},
 
 			/**
