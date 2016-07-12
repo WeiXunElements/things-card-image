@@ -215,7 +215,11 @@
 			 * detailObj에서 key가 imageField의 값과 같은 것을 추출해 imageSrc에 맵핑
 			 */
 			_imageFieldChanged: function(imageField) {
-				this.imageSrc = this.detailObj[this.imageField];
+				var baseUrl = this.get('globals.baseUrl');
+				if(baseUrl && imageField) {
+					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField];
+				}
+
 				if (this.detailFields) {
 					this.detailFieldChanged(this.detailFields);
 				}
@@ -225,8 +229,8 @@
 			 * attachmentId를 통해 image를 추출 합니다.
 			 */
 			_attachmentIdChanged: function(id) {
-				if(id) {
-					var baseUrl = this.get('globals.baseUrl');
+				var baseUrl = this.get('globals.baseUrl');
+				if(id && baseUrl) {
 					this.imageSrc = baseUrl + '/download/' + id;
 				}
 			},
