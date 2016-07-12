@@ -39,7 +39,7 @@
 
 		<paper-card id="card"
 		  heading="[[heading]]"
-	    image="[[imageSrc]]"
+	    image="[[computeImgSrc(imageSrc)]]"
 	    animated="[[animated]]"
 	    animated-shadow="[[animatedShadow]]"
 	    preload-image="[[preloadImage]]"
@@ -206,6 +206,11 @@
 				if (this.detailFields) {
 					this.detailFieldChanged(this.detailFields);
 				}
+			},
+
+			computeImgSrc: function(src) {
+				var src = `${this.globals.baseUrl}/download/${src}`;
+				return src
 			},
 
 			/**
