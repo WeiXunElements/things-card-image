@@ -160,7 +160,8 @@
 				 * things-card-image를 통해 전달받는 property로 카드의 메타 정보를 포함한 object 입니다.
 				 */
 				detailObj: {
-					type: Object
+					type: Object,
+					observer: '_detailObjChanged'
 				},
 
 				/**
@@ -216,12 +217,19 @@
 			 */
 			_imageFieldChanged: function(imageField) {
 				var baseUrl = this.get('globals.baseUrl');
-				if(baseUrl && imageField) {
+				if(baseUrl && this.imageField) {
 					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField];
 				}
 
 				if (this.detailFields) {
 					this.detailFieldChanged(this.detailFields);
+				}
+			},
+
+			_detailObjChanged: function() {
+				var baseUrl = this.get('globals.baseUrl');
+				if(baseUrl && this.imageField) {
+					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField];
 				}
 			},
 
