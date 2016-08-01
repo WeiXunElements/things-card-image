@@ -181,6 +181,14 @@
 				},
 
 				/**
+				 * detailObj에서 이미지 갱신시에 URL 뒤에 업데이트 시간을 붙여 image caching을 지원하기 위한 파라미터 필드면
+				 */
+				dcField: {
+					type: String,
+					value: 'updated_at'
+				},
+
+				/**
 				 * fieldArrayChanged 함수를 통해 추출한 detail 정보의 최종 object 입니다..
 				 */
 				detailForm: {
@@ -218,7 +226,7 @@
 			_imageFieldChanged: function(imageField) {
 				var baseUrl = this.get('globals.baseUrl');
 				if(baseUrl && this.imageField) {
-					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField];
+					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField] + '?dc=' + this.detailObj[this.dcField];
 				}
 
 				if (this.detailFields) {
@@ -226,10 +234,13 @@
 				}
 			},
 
+			/**
+			 * detailObj 변경시 
+			 */
 			_detailObjChanged: function() {
 				var baseUrl = this.get('globals.baseUrl');
 				if(baseUrl && this.imageField) {
-					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField];
+					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField] + '?dc=' + this.detailObj[this.dcField];
 				}
 			},
 
@@ -239,7 +250,7 @@
 			_attachmentIdChanged: function(id) {
 				var baseUrl = this.get('globals.baseUrl');
 				if(id && baseUrl) {
-					this.imageSrc = baseUrl + '/download/' + id;
+					// this.imageSrc = baseUrl + '/download/' + id;
 				}
 			},
 
