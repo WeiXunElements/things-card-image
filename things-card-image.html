@@ -175,10 +175,10 @@
 				/**
 				 * attachment id 를 통해 image를 조회할 경우 사용하는 propertiy
 				 */
-				attachmentId: {
+				/*attachmentId: {
 					type: String,
 					observer: '_attachmentIdChanged'
-				},
+				},*/
 
 				/**
 				 * detailObj에서 이미지 갱신시에 URL 뒤에 업데이트 시간을 붙여 image caching을 지원하기 위한 파라미터 필드면
@@ -247,12 +247,12 @@
 			/**
 			 * attachmentId를 통해 image를 추출 합니다.
 			 */
-			_attachmentIdChanged: function(id) {
+			/*_attachmentIdChanged: function(id) {
 				var baseUrl = this.get('globals.baseUrl');
 				if(id && baseUrl) {
-					// this.imageSrc = baseUrl + '/download/' + id;
+					this.imageSrc = baseUrl + '/download/' + id;
 				}
-			},
+			},*/
 
 			/**
 			 * card image의 detail view를 토글
