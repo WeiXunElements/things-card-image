@@ -61,6 +61,7 @@
 			on-tap="getMetaInfo">
 			<div class="card-info">[[description]]</div>
 			<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
+			<paper-icon-button id="play-video-btn" icon="av:play-arrow" on-tap="_playVideo" hidden="[[!isVideoSelector]]"></paper-icon-button>
 			<iron-collapse 
 				id="card-detail"
 				opened="[[opened]]">
@@ -212,6 +213,14 @@
 				},
 
 				/**
+				 * Video Selector 인지 여부를 판단하여 플레이 버튼을 표시한다.
+				 */
+				isVideoSelector: {
+					type: Booelan,
+					value: false
+				},
+
+				/**
 				 * 상세 정보를 트글하기 위함
 				 */
 				detailToggle: {
@@ -298,6 +307,14 @@
 				} else {
 					this.fire('things-card-image-selected', this.detailObj);
 				}
+			},
+
+			/**
+			 * play 버튼을 클릭했을 때 발생하는 이벤트
+			 * 클릭한 아이템에 대한 디테일 정보를 전송합니다.
+			 */
+			_playVideo: function(){
+				this.fire('things-play-video', this.detailObj);
 			}
 		});
 	</script>

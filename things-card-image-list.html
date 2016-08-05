@@ -17,6 +17,7 @@
 				detail-obj="[[item]]"
 				image-field="[[imageField]]"
 				is-selector="[[isSelector]]"
+				is-video-selector="[[isVideoSelector]]"
 				draggable="true">
 			</things-card-image>
 		</template>
@@ -53,6 +54,14 @@
 				 */
 				isSelector: {
 					type: Boolean,
+					value: false
+				},
+				
+				/**
+				 * Video Selector 인지 여부를 판단하여 플레이 버튼을 표시한다.
+				 */
+				isVideoSelector: {
+					type: Booelan,
 					value: false
 				}
 			}
