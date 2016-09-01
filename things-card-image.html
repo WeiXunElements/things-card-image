@@ -49,7 +49,7 @@
 			@media only all and (min-width:2150px)  {paper-card{width:14.4% !important;}}
 		</style>
 
-		<paper-card 
+		<paper-card
 			id="card"
 			heading="[[heading]]"
 			image="[[imageSrc]]"
@@ -59,10 +59,15 @@
 			fade-image="[[fadeImage]]"
 			elevation="[[elevation]]"
 			on-tap="getMetaInfo">
-			<div class="card-info">[[description]]</div>
+			<div class="card-info">
+				[[description]]
+				<template is="dom-if" if="[[showCardButton]]">
+					<paper-icon-button icon="[[buttonIcon]]" on-tap="_onTapButton"></paper-icon-button>
+				</template>
+			</div>
 			<paper-icon-button id="toggle-btn" icon="hardware:keyboard-arrow-down" on-tap="_toggle" hidden="[[isSelector]]"></paper-icon-button>
 			<paper-icon-button id="play-video-btn" icon="av:play-arrow" on-tap="_playVideo" hidden="[[!isVideoSelector]]"></paper-icon-button>
-			<iron-collapse 
+			<iron-collapse
 				id="card-detail"
 				opened="[[opened]]">
 				<template is="dom-repeat" items="[[detailForm]]">
@@ -245,7 +250,7 @@
 			},
 
 			/**
-			 * detailObj 변경시 
+			 * detailObj 변경시
 			 */
 			_detailObjChanged: function() {
 				var baseUrl = this.get('globals.baseUrl');
@@ -295,7 +300,7 @@
 					var value = this.detailObj[prop];
 					newObjArr.push({ name : prop, value : value});
 				}
-				
+
 				this.detailForm = newObjArr;
 			},
 
@@ -316,6 +321,10 @@
 			 */
 			_playVideo: function(){
 				this.fire('things-play-video', this.detailObj);
+			},
+
+			_onTapButton: function(e) {
+				this.fire('button-click', e.detail)
 			}
 		});
 	</script>
