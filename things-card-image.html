@@ -259,13 +259,11 @@
 			},
 			_setImageSrc : function(){
 				var baseUrl ="";
-				console.log(this.useContextPath);
 				if(this.useContextPath){
 					baseUrl =this.globals.user.domain.contextPath;
 				}else{
 					baseUrl = this.get('globals.baseUrl');
 				}
-				console.log(baseUrl);
 				if(baseUrl && this.imageField) {
 					this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField] + '?dc=' + this.detailObj[this.dcField];
 				}
