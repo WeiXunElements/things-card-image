@@ -13,7 +13,7 @@
 			<things-card-image
 				heading="[[item.description]]"
 				description="[[item.name]]"
-				use-context-path="[[useContextPath]]"
+				use-file-service-url="[[useFileServiceUrl]]"
 				detail-fields="[[detailFields]]"
 				detail-obj="[[item]]"
 				image-field="[[imageField]]"
@@ -21,8 +21,7 @@
 				is-video-selector="[[isVideoSelector]]"
 				draggable="true"
 				button-icon="[[buttonIcon]]"
-				show-card-button="[[showCardButton]]"
-				>
+				show-card-button="[[showCardButton]]">
 			</things-card-image>
 		</template>
 	</template>
@@ -38,12 +37,13 @@
 				items: {
 					type: Object
 				},
+
 				/**
-				 * if use contextPath instead baseURL or not
+				 * if use file service url instead baseURL or not
 				 */
-				useContextPath :{
+				useFileServiceUrl: {
 					type: Boolean,
-					value : false
+					value: false
 				},
 
 				/**
