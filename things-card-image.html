@@ -210,10 +210,11 @@
 				},
 
 				/**
-				 * fieldArrayChanged 함수를 통해 추출한 detail 정보의 최종 object 입니다..
+				 * fieldArrayChanged 함수를 통해 추출한 detail 정보의 최종 Array
 				 */
 				detailForm: {
-					type: Object
+					type: Array,
+					computed: '_computeDetailForm(fieldArray, detailObj)'
 				},
 
 				/**
@@ -250,6 +251,18 @@
 			},
 
 			/**
+			 * fieldArray와 detailObj로 detailForm 구성 
+			 */
+			_computeDetailForm: function(fieldArray, detailObj) {
+				var newObjArr = fieldArray.map(function(field) {
+					var value = detailObj[field];
+					return { name : field, value : value };
+				});
+
+				return newObjArr;
+			},
+
+			/**
 			 * detailObj에서 key가 imageField의 값과 같은 것을 추출해 imageSrc에 맵핑
 			 */
 			_imageFieldChanged: function() {
@@ -262,7 +275,7 @@
 			/**
 			 * detailObj 변경시
 			 */
-			_detailObjChanged: function() {
+			_detailObjChanged: function(detailObj) {
 				this._setImageSrc();
 			},
 
