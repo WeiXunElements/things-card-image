@@ -33,6 +33,12 @@
 				font-size:11px;
 				color:green;
 			}
+			paper-card .selected-card-info {
+				padding:7px 7px 7px 7px;
+				font-size:13px;
+				color:red;
+				background-color:#ffd2c1;
+			}
 			paper-card::shadow .title-text {
 				position:relative !important;
 				border-top:1px dotted rgba(0,0,0,.09);
@@ -40,13 +46,13 @@
 				font-size:14px !important
 			}
 
-			@media only all and (min-width: 400px)  {paper-card{width:  98% !important;}}
-			@media only all and (min-width: 500px)  {paper-card{width:  47% !important;}}
-			@media only all and (min-width: 800px)  {paper-card{width:  30% !important;}}
-			@media only all and (min-width: 900px)  {paper-card{width:30.5% !important;}}
-			@media only all and (min-width:1250px)  {paper-card{width:22.6% !important;}}
-			@media only all and (min-width:1800px)  {paper-card{width:17.5% !important;}}
-			@media only all and (min-width:2150px)  {paper-card{width:14.4% !important;}}
+			@media only all and (min-width: 400px) { paper-card{width:  98% !important; }}
+			@media only all and (min-width: 500px) { paper-card{width:  47% !important; }}
+			@media only all and (min-width: 800px) { paper-card{width:  30% !important; }}
+			@media only all and (min-width: 900px) { paper-card{width:30.5% !important; }}
+			@media only all and (min-width:1250px) { paper-card{width:22.6% !important; }}
+			@media only all and (min-width:1800px) { paper-card{width:17.5% !important; }}
+			@media only all and (min-width:2150px) { paper-card{width:14.4% !important; }}
 		</style>
 
 		<paper-card
@@ -59,7 +65,7 @@
 			fade-image="[[fadeImage]]"
 			elevation="[[elevation]]"
 			on-tap="getMetaInfo">
-			<div class="card-info">
+			<div class$="[[cardInfoClass]]">
 				[[description]]
 				<template is="dom-if" if="[[showCardButton]]">
 					<paper-icon-button icon="[[buttonIcon]]" on-tap="_onTapButton"></paper-icon-button>
@@ -247,7 +253,35 @@
 				detailToggle: {
 					type: Boolean,
 					value: false
+				},
+
+				/**
+				 * 선택 이미지 아이디 
+				 */
+				selectedImageId: {
+					type: String
+				},
+
+				/**
+				 * card info class
+				 */
+				cardInfoClass: {
+					type: String,
+					value: 'card-info',
+					computed: '_computeSelectedImage(selectedImageId, detailObj, imageField)'
 				}
+			},
+
+			/**
+			 * 선택된 이미지라면 스타일을 변경한다.
+			 *
+			 * @param {String} selectedImageId
+			 * @param {Object} detailObj
+			 * @param {String} imageField
+			 */
+			_computeSelectedImage: function(selectedImageId, detailObj, imageField) {
+				var selected = selectedImageId ? (detailObj[imageField] == selectedImageId) : false;
+				return selected ? 'selected-card-info' : 'card-info';
 			},
 
 			/**
@@ -336,7 +370,7 @@
 			},
 
 			/**
-			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen합니다.
+			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen 합니다.
 			 */
 			getMetaInfo: function(e) {
 				if(this.detailToggle) {
@@ -347,10 +381,9 @@
 			},
 
 			/**
-			 * play 버튼을 클릭했을 때 발생하는 이벤트
-			 * 클릭한 아이템에 대한 디테일 정보를 전송합니다.
+			 * play 버튼을 클릭했을 때 발생하는 이벤트. 클릭한 아이템에 대한 디테일 정보를 전송합니다.
 			 */
-			_playVideo: function(){
+			_playVideo: function() {
 				this.fire('things-play-video', this.detailObj);
 			},
 
@@ -358,8 +391,8 @@
 			 * 버튼을 클릭했을 때 발생하는 이벤트
 			 */
 			_onTapButton: function(e) {
-				this.fire('button-click', this.detailObj)
-				e.stopPropagation()
+				this.fire('button-click', this.detailObj);
+				e.stopPropagation();
 			}
 		});
 	</script>

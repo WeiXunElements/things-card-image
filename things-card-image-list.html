@@ -17,6 +17,7 @@
 				detail-fields="[[detailFields]]"
 				detail-obj="[[item]]"
 				image-field="[[imageField]]"
+				selected-image-id="[[selectedImageId]]"
 				is-selector="[[isSelector]]"
 				is-video-selector="[[isVideoSelector]]"
 				draggable="true"
@@ -74,6 +75,13 @@
 				isVideoSelector: {
 					type: Boolean,
 					value: false
+				},
+
+				/**
+				 * 선택 이미지 아이디 
+				 */
+				selectedImageId: {
+					type: String
 				}
 			}
 		});
