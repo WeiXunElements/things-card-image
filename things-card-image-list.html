@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="../polymer-sortablejs/polymer-sortablejs.html">
 <link rel="import" href="../iron-scroll-target-behavior/iron-scroll-target-behavior.html">
 <link rel="import" href="things-card-image.html">
 
@@ -9,22 +10,29 @@
 
 <dom-module id="things-card-image-list">
 	<template>
-		<template id="card-list" is="dom-repeat" items="[[items]]">
-			<things-card-image
-				heading="[[item.description]]"
-				description="[[item.name]]"
-				use-file-service-url="[[useFileServiceUrl]]"
-				detail-fields="[[detailFields]]"
-				detail-obj="[[item]]"
-				image-field="[[imageField]]"
-				selected-image-id="[[selectedImageId]]"
-				is-selector="[[isSelector]]"
-				is-video-selector="[[isVideoSelector]]"
-				draggable="true"
-				button-icon="[[buttonIcon]]"
-				show-card-button="[[showCardButton]]">
-			</things-card-image>
-		</template>
+    <style>
+      sortable-js ::content .sortable-ghost {
+        opacity: .2
+      }
+    </style>
+		<sortable-js id="sortable-list" disabled="[[!sortable]]" group="[[_sortGroup]]">
+      <template id="card-list" is="dom-repeat" items="[[items]]">
+  			<things-card-image
+  				heading="[[item.description]]"
+  				description="[[item.name]]"
+  				use-file-service-url="[[useFileServiceUrl]]"
+  				detail-fields="[[detailFields]]"
+  				detail-obj="[[item]]"
+  				image-field="[[imageField]]"
+  				selected-image-id="[[selectedImageId]]"
+  				is-selector="[[isSelector]]"
+  				is-video-selector="[[isVideoSelector]]"
+  				draggable="true"
+  				button-icon="[[buttonIcon]]"
+  				show-card-button="[[showCardButton]]">
+  			</things-card-image>
+  		</template>
+    </sortable-js>
 	</template>
 
 	<script>
@@ -78,12 +86,33 @@
 				},
 
 				/**
-				 * 선택 이미지 아이디 
+				 * 선택 이미지 아이디
 				 */
 				selectedImageId: {
 					type: String
-				}
-			}
+				},
+
+        /**
+         *  List의 Sort 가능여부를 결정한다.
+         */
+        sortable: {
+          type: Boolean,
+          value: true
+        },
+
+        _sortGroup: {
+          name: Math.random(),
+          revertClone: true
+        }
+			},
+
+      listeners: {
+        'sortable-list.update': '_onSortableUpdated'
+      },
+
+      _onSortableUpdated: function(e) {
+				this.fire('things-card-image-list-sorted', e)
+      }
 		});
 	</script>
 </dom-module>
