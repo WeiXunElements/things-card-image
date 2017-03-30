@@ -5,7 +5,18 @@
 <link rel="import" href="things-card-image.html">
 
 <!--
-	Image Card List
+## things-card-image-list
+### Image Card List
+
+```html
+<things-card-image-list
+  items="[[items]]"
+  use-file-service-url
+  image-field="path"
+  detail-fields="name,description,mimetype,tag"
+  is-selector>
+</things-card-image-list>
+```
 -->
 
 <dom-module id="things-card-image-list">
@@ -42,14 +53,14 @@
 			properties: {
 				/**
 				 * ajax 호출을 통해 받는 items object
-				 */
+				 *****/
 				items: {
 					type: Object
 				},
 
 				/**
 				 * if use file service url instead baseURL or not
-				 */
+				 *****/
 				useFileServiceUrl: {
 					type: Boolean,
 					value: false
@@ -57,21 +68,21 @@
 
 				/**
 				 * detail view에 출력하고자 하는 field을 string 으로 받는다.
-				 */
+				 *****/
 				detailFields: {
 					type: String
 				},
 
 				/**
 				 * items object에서 실제 image의 url 정보가 들어 있는 키 값을 설정 한다.
-				 */
+				 *****/
 				imageField: {
 					type: String
 				},
 
 				/**
 				 * 현재 화면이 셀렉터인지 확인하여 토글 버튼 비활성화
-				 */
+				 *****/
 				isSelector: {
 					type: Boolean,
 					value: false
@@ -79,7 +90,7 @@
 
 				/**
 				 * Video Selector 인지 여부를 판단하여 플레이 버튼을 표시한다.
-				 */
+				 *****/
 				isVideoSelector: {
 					type: Boolean,
 					value: false
@@ -87,14 +98,14 @@
 
 				/**
 				 * 선택 이미지 아이디
-				 */
+				 *****/
 				selectedImageId: {
 					type: String
 				},
 
         /**
          *  List의 Sort 가능여부를 결정한다.
-         */
+         *****/
         sortable: {
           type: Boolean,
           value: true
@@ -109,7 +120,13 @@
       listeners: {
         'sortable-list.update': '_onSortableUpdated'
       },
-
+			/**
+			 * Fired when a images/vedeos sorted
+			 * param is sortable-list.update event
+			 *
+			 * @event things-card-image-list-sorted
+			 * @param {Object} event
+			 */
       _onSortableUpdated: function(e) {
 				this.fire('things-card-image-list-sorted', e)
       }

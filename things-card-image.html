@@ -7,7 +7,8 @@
 <link rel="import" href="../things-global-behavior/things-global-behavior.html">
 
 <!--
-	Image Card
+## things-card-image
+### Image Card
 -->
 
 <dom-module id="things-card-image">
@@ -72,17 +73,17 @@
 				</template>
 			</div>
 
-			<paper-icon-button 
-				id="toggle-btn" 
-				icon="hardware:keyboard-arrow-down" 
-				on-tap="_toggle" 
+			<paper-icon-button
+				id="toggle-btn"
+				icon="hardware:keyboard-arrow-down"
+				on-tap="_toggle"
 				hidden="[[isSelector]]">
 			</paper-icon-button>
 
-			<paper-icon-button 
-				id="play-video-btn" 
-				icon="av:play-arrow" 
-				on-tap="_playVideo" 
+			<paper-icon-button
+				id="play-video-btn"
+				icon="av:play-arrow"
+				on-tap="_playVideo"
 				hidden="[[!isVideoSelector]]">
 			</paper-icon-button>
 
@@ -107,6 +108,7 @@
 			properties: {
 				/**
 				 * card image의 title text
+				 *****
 				 */
 				heading: {
 					type: String
@@ -114,6 +116,7 @@
 
 				/**
 				 * card image description
+				 ****
 				 */
 				description: {
 					type: String
@@ -121,6 +124,7 @@
 
 				/**
 				 * image source (image src url)
+				 ****
 				 */
 				imageSrc: {
 					type: String
@@ -128,6 +132,7 @@
 
 				/**
 				 * if use file service base url instead baseURL or not
+				 ****
 				 */
 				useFileServiceUrl: {
 					type: Boolean,
@@ -136,6 +141,7 @@
 
 				/**
 				 * Read-only property used to pass down the animatedShadow value to the underlying paper-material style (since they have different names).
+				 ****
 				 */
 				animated: {
 					type: Boolean,
@@ -144,7 +150,7 @@
 
 				/**
 				 * Set this to true to animate the card shadow when setting a new z value.
-				 */
+				 *****/
 				animatedShadow: {
 					type: Boolean,
 					value: false
@@ -152,6 +158,7 @@
 
 				/**
 				 * When preloadImage is true, setting fadeImage to true will cause the image to fade into place.
+				 ****
 				 */
 				fadeImage: {
 					type: Boolean,
@@ -160,6 +167,7 @@
 
 				/**
 				 * When true, any change to the image url property will cause the placeholder image to be shown until the image is fully rendered.
+				 ****
 				 */
 				preloadImage: {
 					type: Boolean,
@@ -168,6 +176,7 @@
 
 				/**
 				 * The z-depth of the card, from 0-5.
+				 ****
 				 */
 				elevation: {
 					type: Number
@@ -175,6 +184,7 @@
 
 				/**
 				 * 화면에 표시될 Detail Fields
+				 ****
 				 */
 				detailFields: {
 					type: String,
@@ -183,6 +193,7 @@
 
 				/**
 				 * things-card-image를 통해 전달받는 property로 detail 정보에 출력할 필드 목록을 array 형태로 받습니다.
+				 ****
 				 */
 				fieldArray: {
 					type: Array,
@@ -191,7 +202,7 @@
 
 				/**
 				 * things-card-image를 통해 전달받는 property로 카드의 메타 정보를 포함한 object 입니다.
-				 */
+				 *****/
 				detailObj: {
 					type: Object,
 					reflectToAttribute: true,
@@ -201,6 +212,7 @@
 				/**
 				 * detailObj에서 image src의 url이 포함된 필드를 string으로 받습니다.
 				 * useFileServiceUrl가 true 일 경우 useFileServiceUrl에 해당되는 path 필요
+				 ****
 				 */
 				imageField: {
 					type: String,
@@ -209,7 +221,7 @@
 
 				/**
 				 * detailObj에서 이미지 갱신시에 URL 뒤에 업데이트 시간을 붙여 image caching을 지원하기 위한 파라미터 필드면
-				 */
+				 *****/
 				dcField: {
 					type: String,
 					value: 'updated_at'
@@ -217,6 +229,7 @@
 
 				/**
 				 * fieldArrayChanged 함수를 통해 추출한 detail 정보의 최종 Array
+				 ****
 				 */
 				detailForm: {
 					type: Array,
@@ -225,6 +238,7 @@
 
 				/**
 				 * detail view를 펼쳐 놓을지 여부.
+				 ****
 				 */
 				opened: {
 					type: Boolean,
@@ -233,6 +247,7 @@
 
 				/**
 				 * 현재 화면이 셀렉터인지 확인하여 토글 버튼 비활성화
+				 ****
 				 */
 				isSelector: {
 					type: Boolean,
@@ -241,6 +256,7 @@
 
 				/**
 				 * Video Selector 인지 여부를 판단하여 플레이 버튼을 표시한다.
+				 ****
 				 */
 				isVideoSelector: {
 					type: Boolean,
@@ -249,6 +265,7 @@
 
 				/**
 				 * 상세 정보를 트글하기 위함
+				 ****
 				 */
 				detailToggle: {
 					type: Boolean,
@@ -256,7 +273,8 @@
 				},
 
 				/**
-				 * 선택 이미지 아이디 
+				 * 선택 이미지 아이디
+				 ****
 				 */
 				selectedImageId: {
 					type: String
@@ -264,6 +282,7 @@
 
 				/**
 				 * card info class
+				 ****
 				 */
 				cardInfoClass: {
 					type: String,
@@ -274,7 +293,7 @@
 
 			/**
 			 * 선택된 이미지라면 스타일을 변경한다.
-			 *
+			 ****
 			 * @param {String} selectedImageId
 			 * @param {Object} detailObj
 			 * @param {String} imageField
@@ -285,7 +304,8 @@
 			},
 
 			/**
-			 * fieldArray와 detailObj로 detailForm 구성 
+			 * fieldArray와 detailObj로 detailForm 구성
+			 *****
 			 */
 			_computeDetailForm: function(fieldArray, detailObj) {
 				var newObjArr = fieldArray.map(function(field) {
@@ -298,6 +318,7 @@
 
 			/**
 			 * detailObj에서 key가 imageField의 값과 같은 것을 추출해 imageSrc에 맵핑
+			 ****
 			 */
 			_imageFieldChanged: function() {
 				this._setImageSrc();
@@ -308,13 +329,15 @@
 
 			/**
 			 * detailObj 변경시
+			 ****
 			 */
 			_detailObjChanged: function(detailObj) {
 				this._setImageSrc();
 			},
 
 			/**
-			 * image source 설정 
+			 * image source 설정
+			 ****
 			 */
 			_setImageSrc: function() {
 				var baseUrl = '';
@@ -336,6 +359,7 @@
 
 			/**
 			 * card image의 detail view를 토글
+			 ****
 			 */
 			_toggle: function() {
 				var moreInfo = this.$['card-detail'];
@@ -348,6 +372,7 @@
 			/**
 			 * attribute로 전달받은 string 형태의 detailFileds를 array형태로 변환하고
 			 * fieldArray에 초기화
+			 ****
 			 */
 			detailFieldChanged: function(fields) {
 				this.fieldArray = fields.split(',');
@@ -355,6 +380,7 @@
 
 			/**
 			 * fieldArray, detailObj를 바탕으로 화면에 출력할 detailForm을 추출합니다.
+			 ****
 			 */
 			fieldArrayChanged: function(fieldArray) {
 				var tempObj = this.detailObj;
@@ -368,9 +394,16 @@
 
 				this.detailForm = newObjArr;
 			},
+			/**
+			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen 합니다.
+			 *****
+			 * @event things-card-image-selected
+			 * @param {Object} detailObj
+			 */
 
 			/**
 			 * image 클릭시 발생하는 event로 things-image-selector에서 해당 event를 listen 합니다.
+			 ****
 			 */
 			getMetaInfo: function(e) {
 				if(this.detailToggle) {
@@ -379,16 +412,29 @@
 					this.fire('things-card-image-selected', this.detailObj);
 				}
 			},
-
 			/**
 			 * play 버튼을 클릭했을 때 발생하는 이벤트. 클릭한 아이템에 대한 디테일 정보를 전송합니다.
+			 *****
+			 * @event things-play-video
+			 * @param {Object} detailObj
+			 */
+			
+			/**
+			 * play 버튼을 클릭했을 때 발생하는 이벤트. 클릭한 아이템에 대한 디테일 정보를 전송합니다.
+			 ****
 			 */
 			_playVideo: function() {
 				this.fire('things-play-video', this.detailObj);
 			},
-
+			/**
+			 * Card내의 버튼을 클릭했을 때 발생하는 이벤트
+			 *****
+			 * @event button-click
+			 * @param {Object} detailObj
+			 */
 			/**
 			 * 버튼을 클릭했을 때 발생하는 이벤트
+			 * ****
 			 */
 			_onTapButton: function(e) {
 				this.fire('button-click', this.detailObj);

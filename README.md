@@ -1,38 +1,48 @@
 # things-card-image
 
-An element providing a starting point for your own reusable Polymer elements.
+```html
+<things-card-image-list
+  items="[[items]]"
+  use-file-service-url
+  image-field="path"
+  detail-fields="name,description,mimetype,tag"
+  is-selector>
+</things-card-image-list>
+```
 
 
-## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+## 2. 개발
+### 2.1 Polymer-CLI 설치
 
-    npm install -g bower
+First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-Then, go ahead and download the element's dependencies:
+### 2.2 Application 수행
 
-    bower install
+```
+$ polymer serve
+```
 
+### 2.3 Application 빌드
 
-## Playing With Your Element
+```
+$ polymer build
+```
 
-If you wish to work on your element in isolation, we recommend that you use
-[Polyserve](https://github.com/PolymerLabs/polyserve) to keep your element's
-bower dependencies in line. You can install it via:
+아래 명령어로 ` build/bundled`나 ` build/unbundled`에서 서버를 띄울수 있다.
 
-    npm install -g polyserve
+```
+$ polymer serve build/bundled
+```
 
-And you can run it via:
+### 2.3 Running Tests
 
-    polyserve
+```
+$ polymer test
+```
 
-Once running, you can preview your element at
-`http://localhost:8080/components/things-card-image/`, where `things-card-image` is the name of the directory containing it.
-
-
-## Example 1. Things Card Image
-`<things-card-image>` Things Card Image
-
-## Example 2. Things Card Image List
-`<things-card-image-list>` Things Card Image List
+테스트는 [web-component-tester](https://github.com/Polymer/web-component-tester)에서 설명한데로 설정완료됨.
+아래 명령어로 테스트를 수행할 수 있다.
+```
+$ polymer test
+```
