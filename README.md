@@ -1,4 +1,5 @@
 # things-card-image
+## 이미지 정보를 이미지와 설명형태로 명함과 비슷한 모양으로 표현하는 카드형태의 컴포넌트
 
 ```html
 <things-card-image-list
