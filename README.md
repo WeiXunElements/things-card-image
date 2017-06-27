@@ -1,5 +1,5 @@
 # things-card-image
-## 이미지 정보를 이미지와 설명형태로 명함과 비슷한 모양으로 표현하는 카드형태의 컴포넌트
+## It is a card-like component that represents image information in images and descriptions in a manner similar to business cards.
 
 ```html
 <things-card-image-list
@@ -13,37 +13,37 @@
 
 
 
-## 2. 개발
-### 2.1 Polymer-CLI 설치
+## 2. Development
+### 2.1 Install Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
 
-### 2.2 Application 수행
+### 2.2 Run Application
 
 ```
 $ polymer serve
 ```
 
-### 2.3 Application 빌드
+### 2.3 Build Application
 
 ```
 $ polymer build
 ```
 
-아래 명령어로 ` build/bundled`나 ` build/unbundled`에서 서버를 띄울수 있다.
+You can launch the server from `build/bundled` or `build/unbundled` with the following command:
 
 ```
 $ polymer serve build/bundled
 ```
 
-### 2.3 Running Tests
+### 2.4 Run Tests
 
 ```
 $ polymer test
 ```
 
-테스트는 [web-component-tester](https://github.com/Polymer/web-component-tester)에서 설명한데로 설정완료됨.
-아래 명령어로 테스트를 수행할 수 있다.
+The test has been set up as described in [web-component-tester](https://github.com/Polymer/web-component-tester).
+You can run the test with the following command.
 ```
 $ polymer test
 ```
