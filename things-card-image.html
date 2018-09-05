@@ -366,11 +366,11 @@ Copyright © HatioLab Inc. All rights reserved.
 					baseUrl = this.get('globals.baseUrl');
 				}
 
-				if(baseUrl && this.imageField) {
-					if(this.useFileServiceUrl) {
+				if(baseUrl) {
+					if(this.useFileServiceUrl && this.imageField) {
 						this.imageSrc = baseUrl + this.detailObj[this.imageField] + '?dc=' + this.detailObj[this.dcField];
 					} else {
-						this.imageSrc = baseUrl + '/download/' + this.detailObj[this.imageField] + '?dc=' + this.detailObj[this.dcField];
+						this.imageSrc = baseUrl + '/download/' + this.detailObj.id;
 					}
 				}
 			},
