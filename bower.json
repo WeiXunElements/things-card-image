@@ -1,8 +1,8 @@
 {
   "name": "things-card-image",
-  "version": "v2.2.5",
+  "version": "v2.2.6",
   "authors": [
-    "Hatio Lab. <heartyoh@hatiolab.com>"
+    "Shenzhen Weixun"
   ],
   "description": "An element providing things-card-image & things-card-image-list.",
   "keywords": [
@@ -11,8 +11,6 @@
     "seed"
   ],
   "main": "things-card-image.html",
-  "license": "http://license.hatiolab.com/EULA",
-  "homepage": "http://elements.hatiolab.com/",
   "ignore": [
     "/.*",
     "/test/"
